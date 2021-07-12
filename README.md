@@ -1,1 +1,1 @@
-# summer_iot
+# 산학SW프로젝트
