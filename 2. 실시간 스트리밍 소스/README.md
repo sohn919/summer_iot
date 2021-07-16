@@ -8,7 +8,7 @@
 + 설치된 패키지를 업데이트 시켜주기 위한 명령어입니다.
 
       sudo apt-get update
-      sudo apt-get upgrade<br />
+      sudo apt-get upgrade
 #
 + mjpg 폴더를 만들고 mjpg 폴더로 체인지 시켜줍니다.
 
