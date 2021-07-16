@@ -59,4 +59,3 @@
 ![image](https://user-images.githubusercontent.com/84082544/125980146-aa422c2b-7247-4d21-9894-f510b3896b53.png)
 
 + 스트리밍 창
-[![Video Label](http://img.youtube.com/vi/uLR1RNqJ1Mw/0.jpg)](https://www.youtube.com/watch?v=CRJi3Z2CR3k)
