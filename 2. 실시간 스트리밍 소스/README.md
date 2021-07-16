@@ -9,8 +9,8 @@
 
       sudo apt-get update
       sudo apt-get upgrade
-#
 <br />
+#
 + mjpg 폴더를 만들고 mjpg 폴더로 체인지 시켜줍니다.
 
       sudo mkdir mjpg
