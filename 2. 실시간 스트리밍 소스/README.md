@@ -33,3 +33,22 @@
 
       make CMAKE_BUILD_TYPE=Debug
 #
++ mjpg-streamer를 설치 시켜줍니다.
+
+      sudo make install
+#
++ mjpg.sh 파일을 nano 편집기로 열어 줍니다.
+
+      cd
+      sudo nano mjpg.sh
+#
++ 아래 내용을 입력하여 저장 후 나옵니다.
+
+      export STREAMER_PATH=$HOME/mjpg/mjpg-streamer/mjpg-streamer-experimental
+      export LD_LIBRARY_PATH=$STREAMER_PATH
+      $STREAMER_PATH/mjpg_streamer -i "input_raspicam.so" -o "output_http.so -p 8091 -w $STREAMER_PATH/www"
+#
++ 스크립트를 실행 시켜줍니다.
+
+      sh mjpg.sh
+#
