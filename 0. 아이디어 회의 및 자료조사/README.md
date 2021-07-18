@@ -54,6 +54,11 @@
 
 
 
+
+
+
+
+
 ### sw 개발도구
 
 ![소프트웨어](https://user-images.githubusercontent.com/77609451/126068457-62c24bf2-d845-48d3-9363-ec6ea0e584eb.PNG)
@@ -69,6 +74,9 @@
 + 아두이노, 라즈베리파이, 파이카메라, 초음파센서, 온습도센서, 블루투스 모듈
 
 
+
+### 프로젝트 구성
+![구성](https://user-images.githubusercontent.com/77609451/126068853-3a9b6524-c8e2-4e82-bab5-d6eb1555d665.PNG)
 
 
 
