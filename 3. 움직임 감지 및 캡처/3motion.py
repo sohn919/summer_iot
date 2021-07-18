@@ -2,10 +2,13 @@ import cv2
 import numpy as np
 import time
 import os
+import serial
 
 count = 0
 count2 = 0
-start = 0 
+start = 0
+
+ser = serial.Serial('/dev/ttyUSB0', 9600)
  
 thresh = 25
 max_diff = 5
@@ -69,6 +72,8 @@ if cap.isOpened():
 
         else:
             if(int(time.time() - start) == 5):
+                c = '1'.encode('utf-8')
+                ser.write(c)
                 count2 += 1
                 count = 0
                 time.sleep(1)
