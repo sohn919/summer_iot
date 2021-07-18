@@ -47,9 +47,15 @@
 ***
 
 sw 개발도구
+
+![소프트웨어](https://user-images.githubusercontent.com/77609451/126068457-62c24bf2-d845-48d3-9363-ec6ea0e584eb.PNG)
+
 + 아두이노, 라즈베리파이, 안드로이드 스튜디오, 파이썬
 
 hw 개발도구
+
+![하드웨어](https://user-images.githubusercontent.com/77609451/126068476-fcd18b48-5fc3-4c26-a8a8-c31b04b2505f.PNG)
+
 + 아두이노, 라즈베리파이, 파이카메라, 초음파센서, 온습도센서, 블루투스 모듈
 
 ![gg](https://user-images.githubusercontent.com/77609451/125288123-bba96480-e358-11eb-9157-f2a9e8f122d0.PNG)
