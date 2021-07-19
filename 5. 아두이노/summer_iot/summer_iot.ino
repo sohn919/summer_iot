@@ -65,7 +65,7 @@ void loop()
   BTSerial.print(blue3);
  }
 
- BTSerial.print(,);
+ BTSerial.print(",");
 
  if(Serial.available() > 0) {
   blue4 = 1;
