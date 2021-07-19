@@ -15,6 +15,7 @@ float distance;
 SoftwareSerial BTSerial(2, 3);
 int blue3 = 0;
 int blue4 = 0;
+int count = 0;
  
 void setup()
 {
@@ -27,7 +28,6 @@ void setup()
 void loop() 
 {
  delay(2000);
- int count = 0;
  int h = dht.readHumidity(); // 습도값을 h에 저장
  int t = dht.readTemperature(); // 온도값을 t에 저장
 // Serial.print("Humidity: "); // 문자열 출력
@@ -36,9 +36,7 @@ void loop()
 // Serial.print("Temperature: ");
 // Serial.print(t); // 온도값 출력
 // Serial.println("C");
- BTSerial.print(t);
- BTSerial.print(",");
- BTSerial.print(h);
+
 
 //초음파 센서
  digitalWrite(trig,HIGH);
@@ -46,11 +44,17 @@ void loop()
  digitalWrite(trig,LOW);
  duration = pulseIn(echo,HIGH);     //pulseIn함수의 단위는 ms(마이크로 세컨드)
  distance = ((34000*duration)/1000000)/2;
- Serial.print(distance);
- Serial.println("cm");
- delay(100);
+// Serial.print(distance);
+// Serial.println("cm");
+   delay(100);
+
+   
+ BTSerial.print("2.0");
+ BTSerial.print(",");
+ BTSerial.print("3.0");
  
  BTSerial.print(",");
+ 
 
 //물품이 왔다는 걸 알리기 위한 코드
  if(distance != 200) {
@@ -61,16 +65,28 @@ void loop()
  if(count == 5) {
   blue3 = 2;
   BTSerial.print(blue3);
- } else {
+ } else if(count > 5) {
+  blue3 = 0;
+  BTSerial.print(blue3);
+ }
+ else {
+  blue3 = 0;
   BTSerial.print(blue3);
  }
 
  BTSerial.print(",");
-
+ 
+ 
  if(Serial.available() > 0) {
   blue4 = 1;
   BTSerial.print(blue4);
- } else {
+ }else if(Serial.available() < 0){
+  blue4 = 0;
   BTSerial.print(blue4);
  }
+ 
+ BTSerial.print(",");
+ BTSerial.print("0");
+ 
 }
+
