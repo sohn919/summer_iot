@@ -12,7 +12,7 @@ float distance;
 
 //블루투스
 #include <SoftwareSerial.h>
-SoftwareSerial BTSerial(2, 3)
+SoftwareSerial BTSerial(2, 3);
  
 void setup()
 {
@@ -35,7 +35,7 @@ void loop()
 // Serial.print(t); // 온도값 출력
 // Serial.println("C");
  BTSerial.print(t);
- BTSerial.print(,);
+ BTSerial.print(",");
  BTSerial.print(h);
 
 //초음파 센서
