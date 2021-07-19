@@ -50,7 +50,7 @@ void loop()
  Serial.println("cm");
  delay(100);
  
- BTSerial.print(,);
+ BTSerial.print(",");
 
 //물품이 왔다는 걸 알리기 위한 코드
  if(distance != 200) {
