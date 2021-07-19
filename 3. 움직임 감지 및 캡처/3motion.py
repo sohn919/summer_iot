@@ -1,91 +1,85 @@
-//온습도
-#include "DHT.h" // DHT 라이브러리 호출
-#define DHTPIN 6
-#define DHTTYPE DHT11   // DHT11 온습도 센서 사용
-DHT dht(DHTPIN, DHTTYPE);
+import cv2
+import numpy as np
+import time
+import os
+import serial
 
-//초음파 센서
-int trig = 4;
-int echo = 5;
-float duration;
-float distance;
+count = 0
+count2 = 0
+start = 0
 
-//블루투스
-#include <SoftwareSerial.h>
-SoftwareSerial BTSerial(2, 3);
-int blue3 = 0;
-int blue4 = 0;
-int count = 0;
+ser = serial.Serial('/dev/ttyUSB0', 9600)
  
-void setup()
-{
- Serial.begin(9600); // 통신속도 9600으로 통신 시작
- BTSerial.begin(9600);
- pinMode(trig,OUTPUT);
- pinMode(echo,INPUT);
-}
+thresh = 25
+max_diff = 5
  
-void loop() 
-{
- delay(2000);
- int h = dht.readHumidity(); // 습도값을 h에 저장
- int t = dht.readTemperature(); // 온도값을 t에 저장
-// Serial.print("Humidity: "); // 문자열 출력
-// Serial.print(h); // 습도값 출력
-// Serial.print("% ");
-// Serial.print("Temperature: ");
-// Serial.print(t); // 온도값 출력
-// Serial.println("C");
+a, b, c = None, None, None
+ 
+cap = cv2.VideoCapture("http://172.30.1.29:8090/?action=stream")
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 480)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 320)
+ 
+if cap.isOpened():
+    ret, a = cap.read()
+    ret, b = cap.read()
+    while ret:
+        ret, c = cap.read()
+        draw = c.copy()
+        if not ret:
+            break
+ 
+        a_gray = cv2.cvtColor(a, cv2.COLOR_BGR2GRAY)
+        b_gray = cv2.cvtColor(b, cv2.COLOR_BGR2GRAY)
+        c_gray = cv2.cvtColor(c, cv2.COLOR_BGR2GRAY)
+ 
+        diff1 = cv2.absdiff(a_gray, b_gray)
+        diff2 = cv2.absdiff(b_gray, c_gray)
+ 
+        ret, diff1_t = cv2.threshold(diff1, thresh, 255, cv2.THRESH_BINARY)
+        ret, diff2_t = cv2.threshold(diff2, thresh, 255, cv2.THRESH_BINARY)
+ 
+        diff = cv2.bitwise_and(diff1_t, diff2_t)
+ 
+        k = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
+        diff = cv2.morphologyEx(diff, cv2.MORPH_OPEN, k)
+ 
+        diff_cnt = cv2.countNonZero(diff)
+        if diff_cnt > max_diff:
+            try:
+                if not os.path.exists('/var/lib/tomcat9/webapps/ROOT/recources/%d' % count2):
+                    os.mkdir('/var/lib/tomcat9/webapps/ROOT/recources/%d' % count2)
+            except OSError:
+                continue
+            start = time.time()
+            nzero = np.nonzero(diff)
+            cv2.rectangle(draw, (min(nzero[1]), min(nzero[0])),
+                          (max(nzero[1]), max(nzero[0])), (0, 255, 0), 2)
+ 
+            '''
+            rectangle: pt1, pt2 기준으로 사각형 프레임을 만들어줌.
+            nzero: diff는 카메라 영상과 사이즈가 같으며, a, b프레임의 차이 어레이를 의미함.
+            (min(nzero[1]), min(nzero[0]): diff에서 0이 아닌 값 중 행, 열이 가장 작은 포인트
+            (max(nzero[1]), max(nzero[0]): diff에서 0이 아닌 값 중 행, 열이 가장 큰 포인트
+            (0, 255, 0): 사각형을 그릴 색상 값
+            2 : thickness
+            '''
+ 
+            cv2.putText(draw, "Motion detected!!", (10, 30),
+                        cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255))
 
+            cv2.imwrite("/var/lib/tomcat9/webapps/ROOT/recources/%d/motion%d.jpg" % (count2, count), draw)
+            count += 1
 
-//초음파 센서
- digitalWrite(trig,HIGH);
- delay(10);
- digitalWrite(trig,LOW);
- duration = pulseIn(echo,HIGH);     //pulseIn함수의 단위는 ms(마이크로 세컨드)
- distance = ((34000*duration)/1000000)/2;
-// Serial.print(distance);
-// Serial.println("cm");
-   delay(100);
-
-   
- BTSerial.print("2.0");
- BTSerial.print(",");
- BTSerial.print("3.0");
+        else:
+            if(int(time.time() - start) == 5):
+                arduino = '1'.encode('utf-8')
+                ser.write(arduino)
+                count2 += 1
+                count = 0
+                time.sleep(1)
  
- BTSerial.print(",");
+        a = b
+        b = c
  
-
-//물품이 왔다는 걸 알리기 위한 코드
- if(distance != 200) {
-  count++;
- } else {
-  count = 0;
- }
- if(count == 5) {
-  blue3 = 2;
-  BTSerial.print(blue3);
- } else if(count > 5) {
-  blue3 = 0;
-  BTSerial.print(blue3);
- }
- else {
-  blue3 = 0;
-  BTSerial.print(blue3);
- }
-
- BTSerial.print(",");
- 
- 
- if(Serial.available() > 0) {
-  blue4 = 1;
-  BTSerial.print(blue4);
- }else if(Serial.available() < 0){
-  blue4 = 0;
-  BTSerial.print(blue4);
- }
- 
- BTSerial.print(",");
- BTSerial.print("0");
- 
-}
+        if cv2.waitKey(1) & 0xFF == 27:
+            break
