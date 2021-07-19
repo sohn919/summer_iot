@@ -5,8 +5,8 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 //초음파 센서
-int trig = 2;
-int echo = 3;
+int trig = 4;
+int echo = 5;
 float duration;
 float distance;
 
