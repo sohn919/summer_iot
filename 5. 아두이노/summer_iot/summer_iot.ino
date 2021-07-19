@@ -13,6 +13,8 @@ float distance;
 //블루투스
 #include <SoftwareSerial.h>
 SoftwareSerial BTSerial(2, 3);
+int blue3 = 0;
+int blue4 = 0;
  
 void setup()
 {
@@ -47,6 +49,8 @@ void loop()
  Serial.print(distance);
  Serial.println("cm");
  delay(100);
+ 
+ BTSerial.print(,);
 
 //물품이 왔다는 걸 알리기 위한 코드
  if(distance != 200) {
@@ -55,6 +59,18 @@ void loop()
   count = 0;
  }
  if(count == 5) {
-  BTSerial.print("2");
+  blue3 = 2;
+  BTSerial.print(blue3);
+ } else {
+  BTSerial.print(blue3);
+ }
+
+ BTSerial.print(,);
+
+ if(Serial.available() > 0) {
+  blue4 = 1;
+  BTSerial.print(blue4);
+ } else {
+  BTSerial.print(blue4);
  }
 }
