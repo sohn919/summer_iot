@@ -18,3 +18,5 @@
 + Python3
 + Android Studio
 + Arduino IDE
+
+굿
