@@ -44,20 +44,20 @@ void loop()
  digitalWrite(trig,LOW);
  duration = pulseIn(echo,HIGH);     //pulseIn함수의 단위는 ms(마이크로 세컨드)
  distance = ((34000*duration)/1000000)/2;
-// Serial.print(distance);
+// Serial.print(distance); 
 // Serial.println("cm");
    delay(100);
 
    
- BTSerial.print("2.0");
+ BTSerial.print(t);
  BTSerial.print(",");
- BTSerial.print("3.0");
+ BTSerial.print(h);
  
  BTSerial.print(",");
  
 
 //물품이 왔다는 걸 알리기 위한 코드
- if(distance != 200) {
+ if(distance < 12) {
   count++;
  } else {
   count = 0;
@@ -80,7 +80,8 @@ void loop()
  if(Serial.available() > 0) {
   blue4 = 1;
   BTSerial.print(blue4);
- }else if(Serial.available() < 0){
+  Serial.read();
+ } else{
   blue4 = 0;
   BTSerial.print(blue4);
  }
