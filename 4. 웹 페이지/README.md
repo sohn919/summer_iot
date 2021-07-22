@@ -2,7 +2,9 @@
 
 + 움직임을 감지할 영상을 지정해 줍니다. (실시간으로 스트림 하는 영상을 사용하였습니다.)
 
-      cap = cv2.VideoCapture("http://0.0.0.0:8090/?action=stream")
+      String path = "/var/lib/tomcat9/webapps/ROOT/recources";
+	File f = new File( path );
+	File[] files = f.listFiles();
 
 # 결과
 
