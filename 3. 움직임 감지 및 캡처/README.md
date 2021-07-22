@@ -45,4 +45,4 @@
 #
 
 ### 움직임 감지 후 폴더별 캡처본 저장
-![KakaoTalk_20210722_165025394](https://user-images.githubusercontent.com/77609451/126671662-056f122b-0127-4232-81ad-06012b0648a9.jpg)
+![굿](https://user-images.githubusercontent.com/77609451/126673032-bea1d52b-0df5-467d-8204-2a109d77d751.PNG)
