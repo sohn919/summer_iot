@@ -41,3 +41,8 @@
 + opencv를 통해 초록색 박스로 움직임이 감지된 것을 확인 할 수 있습니다.
 
 ![KakaoTalk_20210718_235513166](https://user-images.githubusercontent.com/77609451/126071909-ecbe8fc0-f2a2-4aff-889f-727293e1094a.jpg)
+
+#
+
+### 움직임 감지 후 폴더별 캡처본 저장
+![KakaoTalk_20210722_165025394](https://user-images.githubusercontent.com/77609451/126671662-056f122b-0127-4232-81ad-06012b0648a9.jpg)
