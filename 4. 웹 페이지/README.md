@@ -5,7 +5,7 @@
       String path = "/var/lib/tomcat9/webapps/ROOT/recources";
       File f = new File( path );
       File[] files = f.listFiles();
-+
+#
  
 + 파일이 생성된 날짜를 저장해 줍니다.(=> 이것의 역할은 움직임이 감지되면 폴더가 생성되며 폴더가 생성된 날짜가 곧 움직임을 감지한 시간이 됩니다.)
 
@@ -19,13 +19,14 @@
 
       String formatted = simpleDateFormat.format( new Date( time.toMillis() ) );
  
-+
+#
 
 + 지정된 경로에서의 폴더 개수만큼 버튼을 생성해 주고 imageload.jsp에 id값을 넘겨줍니다.
 
       <p><a href="./imageload.jsp?id=<%=i%>" class="button" role="button"><%=formatted %> 움직임 감지  &raquo;</a>
       
-      
+#
+
 ### 소스 코드 - imageload.jsp
 
 
@@ -35,7 +36,7 @@
 
       String path2 = "/var/lib/tomcat9/webapps/ROOT/recources" + "//" + id;
       
-+
+#
 
 + 새로운 경로를 통해 File객체를 생성해주고 이 경로에 있는 파일의 개수만큼 for문을 돌려 이미지를 생성해 줍니다.
 
@@ -50,7 +51,7 @@
 		}
       %>
       
-+
+#
 
 # 결과
 
