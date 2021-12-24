@@ -18,3 +18,7 @@
 + Python3
 + Android Studio
 + Arduino IDE
+
+
+### 앱 화면
+![1](https://user-images.githubusercontent.com/84082544/147313963-5ca1c7fb-3095-4b47-88a0-9974d47c5de0.PNG)
